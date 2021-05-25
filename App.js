@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, StyleSheet, Text, TextInput, View, Alert } from "react-native";
 import Head from "./ui/Head";
+import Values from "./ui/Values";
 
 export default class App extends React.Component {
     constructor() {
@@ -19,34 +20,17 @@ export default class App extends React.Component {
         }
     }
 
-    alert() {
-        Alert.alert("Just saying hi", "This alert does nothing.", [
-            {
-                text: "OK",
-                onPress: () => console.log("hit ok"),
-            },
-            {
-                text: "Cancel",
-                onPress: () => console.log("hit cancel"),
-            },
-        ]);
-    }
-
     render() {
-        let tip = 0.0;
-        if (this.state.inputValue) {
-            tip = parseFloat(this.state.inputValue) * this.state.tip;
-            tip = (Math.round(tip * 100) / 100).toFixed(2);
-        }
-
         return (
             <View>
                 <View>
                     <Head />
                 </View>
                 <View style={styles.container}>
-                    <Button title="Alert" onPress={this.alert} />
-                    <Text>${tip}</Text>
+                    <Values
+                        tipPercent={this.state.tip}
+                        bill={this.state.inputValue}
+                    />
                     <TextInput
                         onChangeText={(text) =>
                             this.setState({ inputValue: text })
