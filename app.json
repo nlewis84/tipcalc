@@ -2,11 +2,14 @@
   "name": "tipcalc",
   "displayName": "tipcalc",
   "expo": {
+    "sdkVersion": "17.0.0",
     "name": "tipcalc",
     "slug": "tipcalc",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "icon": "./logo.png",
+    "ios": {
+      "bundleIdentifier": "dev.nathanlewis.tipcalc",
+      "buildNumber": "1.0.0"
+    }
   }
 }
