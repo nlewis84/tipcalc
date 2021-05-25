@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View, Alert } from "react-native";
+import Head from "./ui/Head";
 
 export default class App extends React.Component {
     constructor() {
@@ -18,6 +19,19 @@ export default class App extends React.Component {
         }
     }
 
+    alert() {
+        Alert.alert("Just saying hi", "This alert does nothing.", [
+            {
+                text: "OK",
+                onPress: () => console.log("hit ok"),
+            },
+            {
+                text: "Cancel",
+                onPress: () => console.log("hit cancel"),
+            },
+        ]);
+    }
+
     render() {
         let tip = 0.0;
         if (this.state.inputValue) {
@@ -26,37 +40,45 @@ export default class App extends React.Component {
         }
 
         return (
-            <View style={styles.container}>
-                <Text>${tip}</Text>
-                <TextInput
-                    onChangeText={(text) => this.setState({ inputValue: text })}
-                    style={styles.input}
-                    keyboardType="numeric"
-                    placeholder="0.00"
-                    value={this.state.inputValue}
-                />
-                <View style={styles.buttonGroup}>
-                    <Button
-                        title="10%"
-                        onPress={() => this.setState({ tip: 0.1 })}
-                    />
-                    <Button
-                        title="20%"
-                        onPress={() => this.setState({ tip: 0.2 })}
-                    />
-                    <Button
-                        title="25%"
-                        onPress={() => this.setState({ tip: 0.25 })}
-                    />
+            <View>
+                <View>
+                    <Head />
+                </View>
+                <View style={styles.container}>
+                    <Button title="Alert" onPress={this.alert} />
+                    <Text>${tip}</Text>
                     <TextInput
-                        value={(this.state.tip * 100).toString()}
-                        style={styles.customTip}
-                        onChangeText={(customTip) =>
-                            this.updateCustomTip({ customTip })
+                        onChangeText={(text) =>
+                            this.setState({ inputValue: text })
                         }
+                        style={styles.input}
                         keyboardType="numeric"
                         placeholder="0.00"
+                        value={this.state.inputValue}
                     />
+                    <View style={styles.buttonGroup}>
+                        <Button
+                            title="10%"
+                            onPress={() => this.setState({ tip: 0.1 })}
+                        />
+                        <Button
+                            title="20%"
+                            onPress={() => this.setState({ tip: 0.2 })}
+                        />
+                        <Button
+                            title="25%"
+                            onPress={() => this.setState({ tip: 0.25 })}
+                        />
+                        <TextInput
+                            value={(this.state.tip * 100).toString()}
+                            style={styles.customTip}
+                            onChangeText={(customTip) =>
+                                this.updateCustomTip({ customTip })
+                            }
+                            keyboardType="numeric"
+                            placeholder="0.00"
+                        />
+                    </View>
                 </View>
             </View>
         );
